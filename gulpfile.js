@@ -10,6 +10,9 @@ const gulpScssLint = require('gulp-scss-lint');
 const gulpSass = require('gulp-sass');
 const gulpAutoprefixer = require('gulp-autoprefixer');
 
+/* HTML */
+const gulpPug = require('gulp-pug');
+
 /* SERVE */
 const gulpBrowserSync = require('browser-sync').create();
 
@@ -71,12 +74,19 @@ function browserSync() {
     /* gulp.watch('app/!*.html').on('change', browserSync.reload); */
 }
 
+function pug() {
+    return gulp.src('src/pages/*.pug')
+        .pipe(gulpPug({}))
+        .pipe(gulp.dest('dist/pages'));
+}
+
 gulp.task('eslint', eslint);
 gulp.task('babel', babel);
 gulp.task('uglify', uglify);
 gulp.task('scsslint', scssLint);
 gulp.task('scsscss', scssCss);
 gulp.task('autoprefixer', autoprefixer);
+gulp.task('pug', pug);
 
 gulp.task('serve', gulp.series('eslint', 'babel', 'uglify', 'scsslint', 'scsscss', 'autoprefixer'), browserSync);
-gulp.task('default', gulp.series('eslint', 'babel', 'uglify', 'scsslint', 'scsscss', 'autoprefixer'));
+gulp.task('default', gulp.series('eslint', 'babel', 'uglify', 'scsslint', 'scsscss', 'autoprefixer', 'pug'));
