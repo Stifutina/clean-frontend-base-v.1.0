@@ -20,6 +20,9 @@
     "gulp": "4.0.0",
     "gulp-babel": "8.0.0",
     "gulp-eslint": "5.0.0",
-    "gulp-uglify": "^3.0.1"
+    "gulp-sass": "^4.0.2",
+    "gulp-scss-lint": "^1.0.0",
+    "gulp-uglify": "^3.0.1",
+    "node-sass": "^4.11.0"
   }
 }

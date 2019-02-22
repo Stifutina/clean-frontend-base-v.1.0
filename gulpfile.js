@@ -1,7 +1,13 @@
 const gulp = require('gulp');
+
+/* JS */
 const gulpBabel = require('gulp-babel');
 const gulpEslint = require('gulp-eslint');
 const gulpUglify = require('gulp-uglify');
+
+/* CSS */
+const gulpScssLint = require('gulp-scss-lint');
+const gulpSass = require('gulp-sass');
 
 function eslint() {
     return gulp.src('src/js/*.js')
@@ -24,10 +30,29 @@ function uglify() {
         .pipe(gulp.dest('dist/js'));
 }
 
+function scssLint() {
+    return gulp.src('src/slyle/*.scss')
+        .pipe(gulpScssLint({
+            config: 'lint.yml',
+        }))
+        .pipe(gulpScssLint.failReporter());
+}
+
+
+function scssCss() {
+    return gulp.src(['src/style/*.scss'])
+        .pipe(gulpSass({
+            outputStyle: 'compressed',
+        }))
+        .pipe(gulp.dest('dist/style'));
+}
+
 
 gulp.task('eslint', eslint);
 gulp.task('babel', babel);
 gulp.task('uglify', uglify);
+gulp.task('scsslint', scssLint);
+gulp.task('scsscss', scssCss);
 
 
-gulp.task('default', gulp.series('eslint', 'babel', 'uglify'));
+gulp.task('default', gulp.series('eslint', 'babel', 'uglify', 'scsslint', 'scsscss'));
