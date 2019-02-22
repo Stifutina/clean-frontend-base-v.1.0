@@ -10,6 +10,9 @@ const gulpScssLint = require('gulp-scss-lint');
 const gulpSass = require('gulp-sass');
 const gulpAutoprefixer = require('gulp-autoprefixer');
 
+/* SERVE */
+const gulpBrowserSync = require('browser-sync').create();
+
 function eslint() {
     return gulp.src('src/js/*.js')
         .pipe(gulpEslint())
@@ -57,6 +60,17 @@ function autoprefixer() {
         .pipe(gulp.dest('dist/style/'));
 }
 
+function browserSync() {
+    gulpBrowserSync.init({
+        server: {
+            baseDir: './',
+        },
+    });
+
+    gulp.watch('src/style/*.scss', ['sass']);
+    /* gulp.watch('app/!*.html').on('change', browserSync.reload); */
+}
+
 gulp.task('eslint', eslint);
 gulp.task('babel', babel);
 gulp.task('uglify', uglify);
@@ -64,5 +78,5 @@ gulp.task('scsslint', scssLint);
 gulp.task('scsscss', scssCss);
 gulp.task('autoprefixer', autoprefixer);
 
-
+gulp.task('serve', gulp.series('eslint', 'babel', 'uglify', 'scsslint', 'scsscss', 'autoprefixer'), browserSync);
 gulp.task('default', gulp.series('eslint', 'babel', 'uglify', 'scsslint', 'scsscss', 'autoprefixer'));
