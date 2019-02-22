@@ -5,5 +5,9 @@
     "es6": true,
     "jquery": true,
     "node": true
+  },
+  "rules": {
+    "no-console": "off",
+    "indent": ["error", 4]
   }
 }

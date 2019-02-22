@@ -1,4 +1,10 @@
 const a = 1;
 const mainFnc = b => b * 2;
 
-console.log(mainFnc(a));
+
+const logTest = () => {
+    console.log(mainFnc(a));
+};
+
+
+logTest();

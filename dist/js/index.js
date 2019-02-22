@@ -1,9 +1,1 @@
-"use strict";
-
-var a = 1;
-
-var mainFnc = function mainFnc(b) {
-  return b * 2;
-};
-
-console.log(mainFnc(a));
+"use strict";var a=1,mainFnc=function(n){return 2*n},logTest=function(){console.log(mainFnc(a))};logTest();
